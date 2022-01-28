@@ -18,26 +18,14 @@ class Shop {
       let name = this.items[i].name
       let quality = this.items[i].quality
       let sellIn = this.items[i].sellIn
+
       if (name !== 'Aged Brie' && name !== 'Backstage passes') {
-        if (quality > 0) {
-          if (name !== 'Sulfuras') {
-            this.decreaseOne(i);
-          }
-        }
+        this.normalProduct(i)
       } else {
         if (quality < 50) {
           this.increaseOne(i)
           if (name === 'Backstage passes') {
-            if (sellIn < 11) {
-              if (quality < 50) {
-                this.increaseOne(i)
-              }
-            }
-            if (sellIn < 6) {
-              if (quality < 50) {
-                this.increaseOne(i)
-              }
-            }
+            this.backStage(i)
           }
         }
       }
@@ -74,8 +62,25 @@ class Shop {
     this.items[i].quality = this.items[i].quality - 1;
   }
 
-  isAgedBrie(){
+  normalProduct(i){
+    if (this.items[i].quality > 0) {
+      if (this.items[i].name !== 'Sulfuras') {
+        this.decreaseOne(i);
+      }
+    }
+  }
 
+  backStage(i){
+    if (this.items[i].sellIn < 11) {
+      if (this.items[i].quality < 50) {
+        this.increaseOne(i)
+      }
+    }
+    if (this.items[i].sellIn < 6) {
+      if (this.items[i].quality < 50) {
+        this.increaseOne(i)
+      }
+    }
   }
 
 }
