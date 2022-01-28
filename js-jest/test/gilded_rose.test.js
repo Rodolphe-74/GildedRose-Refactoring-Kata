@@ -52,6 +52,7 @@ describe("Gilded Rose", () => {
   });
 
   it("Backstage passes", () => {
+      console.log(items[6].quality)
       expect(items[4].quality).toEqual(BP1BU+2);
       expect(items[5].quality).toEqual(BP2BU+3);
       expect(items[6].quality).toEqual(0);

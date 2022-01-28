@@ -15,46 +15,49 @@ class Shop {
   // Mise à jour de la qualité
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes') {
-        if (this.items[i].quality > 0) {
-          if (this.items[i].name != 'Sulfuras') {
-            this.items[i].quality = this.items[i].quality - 1;
+      let name = this.items[i].name
+      let quality = this.items[i].quality
+      let sellIn = this.items[i].sellIn
+      if (name !== 'Aged Brie' && name !== 'Backstage passes') {
+        if (quality > 0) {
+          if (name !== 'Sulfuras') {
+            this.decreaseOne(i);
           }
         }
       } else {
-        if (this.items[i].quality < 50) {
-          this.items[i].quality = this.items[i].quality + 1;
-          if (this.items[i].name == 'Backstage passes') {
-            if (this.items[i].sellIn < 11) {
-              if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1;
+        if (quality < 50) {
+          this.increaseOne(i)
+          if (name === 'Backstage passes') {
+            if (sellIn < 11) {
+              if (quality < 50) {
+                this.increaseOne(i)
               }
             }
-            if (this.items[i].sellIn < 6) {
-              if (this.items[i].quality < 50) {
-                this.items[i].quality = this.items[i].quality + 1;
+            if (sellIn < 6) {
+              if (quality < 50) {
+                this.increaseOne(i)
               }
             }
           }
         }
       }
-      if (this.items[i].name != 'Sulfuras') {
-        this.items[i].sellIn = this.items[i].sellIn - 1;
+      if (name !== 'Sulfuras') {
+        sellIn = sellIn - 1;
       }
-      if (this.items[i].sellIn < 0) {
-        if (this.items[i].name != 'Aged Brie') {
-          if (this.items[i].name != 'Backstage passes') {
-            if (this.items[i].quality > 0) {
-              if (this.items[i].name != 'Sulfuras') {
-                this.items[i].quality = this.items[i].quality - 1;
+      if (sellIn < 0) {
+        if (name !== 'Aged Brie') {
+          if (name !== 'Backstage passes') {
+            if (quality > 0) {
+              if (name !== 'Sulfuras') {
+                this.decreaseOne(i);
               }
             }
           } else {
-            this.items[i].quality = this.items[i].quality - this.items[i].quality;
+            this.items[i].quality = 0;
           }
         } else {
-          if (this.items[i].quality < 50) {
-            this.items[i].quality = this.items[i].quality + 1;
+          if (quality < 50) {
+            this.increaseOne(i)
           }
         }
       }
@@ -62,6 +65,19 @@ class Shop {
 
     return this.items;
   }
+
+  increaseOne(i){
+    this.items[i].quality = this.items[i].quality + 1;
+  }
+
+  decreaseOne(i){
+    this.items[i].quality = this.items[i].quality - 1;
+  }
+
+  isAgedBrie(){
+
+  }
+
 }
 
 module.exports = {

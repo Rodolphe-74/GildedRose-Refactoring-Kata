@@ -96,7 +96,23 @@
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
@@ -113,6 +129,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -162,6 +181,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,46 +215,49 @@ class Shop {
   // Mise à jour de la qualité
   updateQuality() {
     for (let i = 0; i &lt; this.items.length; i++) {
-      if (this.items[i].name != 'Aged Brie' &amp;&amp; this.items[i].name != 'Backstage passes') {
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (this.items[i].quality &gt; 0) {
-          if (this.items[i].name != 'Sulfuras') {
-            this.items[i].quality = this.items[i].quality - 1;
+      let name = this.items[i].name
+      let quality = this.items[i].quality
+      let sellIn = this.items[i].sellIn
+      if (name != 'Aged Brie' &amp;&amp; name != 'Backstage passes') {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (quality &gt; 0) {
+          if (name != 'Sulfuras') {
+            this.decreaseOne(i);
           }
         }
       } else {
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (this.items[i].quality &lt; 50) {
-          this.items[i].quality = this.items[i].quality + 1;
-          if (this.items[i].name == 'Backstage passes') {
-            <span class="missing-if-branch" title="else path not taken" >E</span>if (this.items[i].sellIn &lt; 11) {
-              <span class="missing-if-branch" title="else path not taken" >E</span>if (this.items[i].quality &lt; 50) {
-                this.items[i].quality = this.items[i].quality + 1;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (quality &lt; 50) {
+          this.increaseOne(i)
+          if (name == 'Backstage passes') {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (sellIn &lt; 11) {
+              <span class="missing-if-branch" title="else path not taken" >E</span>if (quality &lt; 50) {
+                this.increaseOne(i)
               }
             }
-            if (this.items[i].sellIn &lt; 6) {
-              <span class="missing-if-branch" title="else path not taken" >E</span>if (this.items[i].quality &lt; 50) {
-                this.items[i].quality = this.items[i].quality + 1;
+            if (sellIn &lt; 6) {
+              <span class="missing-if-branch" title="else path not taken" >E</span>if (quality &lt; 50) {
+                this.increaseOne(i)
               }
             }
           }
         }
       }
-      if (this.items[i].name != 'Sulfuras') {
-        this.items[i].sellIn = this.items[i].sellIn - 1;
+      if (name != 'Sulfuras') {
+        sellIn = sellIn - 1;
       }
-      if (this.items[i].sellIn &lt; 0) {
-        if (this.items[i].name != 'Aged Brie') {
-          if (this.items[i].name != 'Backstage passes') {
-            <span class="missing-if-branch" title="else path not taken" >E</span>if (this.items[i].quality &gt; 0) {
-              <span class="missing-if-branch" title="else path not taken" >E</span>if (this.items[i].name != 'Sulfuras') {
-                this.items[i].quality = this.items[i].quality - 1;
+      if (sellIn &lt; 0) {
+        if (name != 'Aged Brie') {
+          if (name != 'Backstage passes') {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (quality &gt; 0) {
+              <span class="missing-if-branch" title="else path not taken" >E</span>if (name != 'Sulfuras') {
+                this.decreaseOne(i);
               }
             }
           } else {
-            this.items[i].quality = this.items[i].quality - this.items[i].quality;
+            this.items[i].quality = 0;
           }
         } else {
-          <span class="missing-if-branch" title="else path not taken" >E</span>if (this.items[i].quality &lt; 50) {
-            this.items[i].quality = this.items[i].quality + 1;
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (quality &lt; 50) {
+            this.increaseOne(i)
           }
         }
       }
@@ -230,6 +265,19 @@ class Shop {
 &nbsp;
     return this.items;
   }
+&nbsp;
+  increaseOne(i){
+    this.items[i].quality = this.items[i].quality + 1;
+  }
+&nbsp;
+  decreaseOne(i){
+    this.items[i].quality = this.items[i].quality - 1;
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  is</span>AgedBrie(){
+&nbsp;
+  }
+&nbsp;
 }
 &nbsp;
 module.exports = {
@@ -242,7 +290,7 @@ module.exports = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 28 2022 13:54:13 GMT+0100 (heure normale d’Europe centrale)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 28 2022 15:44:27 GMT+0100 (heure normale d’Europe centrale)
 </div>
 </div>
 <script src="prettify.js"></script>
